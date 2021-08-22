@@ -22,6 +22,9 @@ Deleting a cluster
 Creating a deployment
 > kubectl create deployment deployment-name --image=image-tag
 
+Creating a deployment with a yaml file
+> kubectl apply -f manifests/deployment.yaml
+
 Checking deployments:
 > kubectl get deployments
 
@@ -30,3 +33,6 @@ Checking pods:
 
 Checking logs:
 > kubectl logs -f deployment-id
+
+Delete a deployment
+> kubectl delete deployments.apps deployment-name
