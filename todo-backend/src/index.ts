@@ -8,6 +8,10 @@ app.get('/', (_req, res) => {
   res.send('Hello world!');
 });
 
+app.get('/log', (_req, res) => {
+  res.send(uuidGen.createTimestampedUUID());
+});
+
 // start the Express server
 app.listen(port, () => {
   console.log(`Server started in port ${port}`);

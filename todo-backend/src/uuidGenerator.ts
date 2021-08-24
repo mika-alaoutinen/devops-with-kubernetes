@@ -13,4 +13,4 @@ export const logUUID = () => {
   setTimeout(logUUID, 5000);
 };
 
-export default { logUUID };
+export default { createTimestampedUUID, logUUID };
