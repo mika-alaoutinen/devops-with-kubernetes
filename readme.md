@@ -5,10 +5,6 @@ A University of Helsinki [MOOC](https://devopswithkubernetes.com/).
 ---
 
 ## Local environment info
-I am running Kubernetes with WSL2, which means that probably the most convenient way is to use Kubernetes via Docker Desktop. The course material instructs to use k3d instead.
-
-To use Kubernetes with Docker Desktop, make sure that the Kubernetes context is set up correctly. For me, it should point to `docker-desktop`. Check and set the context like this:
-
 ```
 kubectl config get-contexts
 kubectl config use-context docker-desktop

@@ -8,7 +8,7 @@ spec:
     app: todo-frontend
   ports:
     - name: http
-      nodePort: 30001
+      nodePort: 30080
       protocol: TCP
-      port: 8080
+      port: 8082
       targetPort: 3000
