@@ -1,16 +1,16 @@
 import express from 'express';
+import logsRouter from './routes/logs';
 import uuidGen from './uuidGenerator';
 
 const app = express();
 const port = 8080;
 
+// Routes
 app.get('/', (_req, res) => {
   res.send('Hello world!');
 });
 
-app.get('/log', (_req, res) => {
-  res.send(uuidGen.createTimestampedUUID());
-});
+app.use('/log', logsRouter);
 
 // start the Express server
 app.listen(port, () => {
