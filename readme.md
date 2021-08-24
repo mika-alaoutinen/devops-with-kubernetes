@@ -15,29 +15,12 @@ kubectl config use-context docker-desktop
 ```
 
 ## Troubleshooting
-I've had issues with port forwarding not working correctly. After some fiddling around, I got it working. Things I did to make port-forwarding work:
-  1. Switch from k3d to Docker Desktop.
-  2. Ran `wsl --shutdown` in Powershell.
-  3. `Reset Kubernetes Cluster` in Docker Desktop settings.
-  4. Reboot PC.
+I've had issues with port forwarding not working correctly. It seems to be a common problem [link](https://github.com/microsoft/WSL/issues/4199). The following band-aid fix has worked for me so far:
+  1. Exit Docker Desktop.
+  2. Run `wsl --shutdown` in Windows Terminal.
+  4. Start Docker Desktop again.
 
-I Don't know which of the above did the trick, but port-forwarding works for now.
-
----
-
-## k3d commands
-
-Creating a cluster with 2 agents:
-```
-k3d cluster create -a 2
-```
-
-### Managing a cluster
-```
-k3d cluster start
-k3d cluster stop
-k3d cluster delete
-```
+Might also want to try out [this script](https://github.com/microsoft/WSL/issues/4150#issuecomment-504209723) to fix it..?
 
 ---
 
@@ -69,4 +52,20 @@ kubectl delete pod pod-id
 ### Read logs
 ```
 kubectl logs -f deployment-id
+```
+
+---
+
+## k3d commands
+
+Creating a cluster with 2 agents:
+```
+k3d cluster create -a 2
+```
+
+### Managing a cluster
+```
+k3d cluster start
+k3d cluster stop
+k3d cluster delete
 ```
