@@ -1,13 +1,20 @@
 import fs from 'fs';
+import path from 'path';
+
+const dir = '/usr/src/app';
+
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir, { recursive: true });
+}
+
+const filePath = path.join(dir, 'timestamp.txt');
 
 const writeToFile = (): void => {
   const errorHandler = (e: any): void | null => (e
     ? console.log('error writing file:', e)
     : null);
 
-  const fileName = 'timestamp.txt';
-  const timestamp = new Date().toISOString();
-  fs.writeFile(fileName, timestamp, errorHandler);
+  fs.writeFile(filePath, new Date().toISOString(), errorHandler);
 };
 
 export const writeTimestampEveryFiveSeconds = () => {
