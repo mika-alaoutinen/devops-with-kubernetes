@@ -1,7 +1,6 @@
 {
   "eslint.workingDirectories": [
-    "main-app-reader",
-    "main-app-writer",
+    "main-app",
     "pingpong",
     "todo-backend",
     "todo-frontend"

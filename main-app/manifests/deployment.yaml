@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main-app-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-app
+  template:
+    metadata:
+      labels:
+        app: main-app
+    spec:
+      containers:
+        - name: main-app-reader
+          image: mikaalaoutinen/main-app-reader:latest
+        - name: main-app-writer
+          image: mikaalaoutinen/main-app-writer:latest
