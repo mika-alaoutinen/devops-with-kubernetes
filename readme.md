@@ -57,6 +57,7 @@ kubectl logs -f deployment-id
 Creating a cluster with 2 agents:
 ```
 k3d cluster create -a 2
+k3d cluster create --port '8082:30080@agent[0]' -p 8081:80@loadbalancer --agents 2
 ```
 
 ### Managing a cluster
