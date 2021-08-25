@@ -7,7 +7,7 @@ const port = 8080;
 
 // Routes
 app.get('/', (_req, res) => {
-  res.send('Hello world!');
+  res.send('Hello from Main App Writer!');
 });
 
 app.use('/log', logsRouter);
