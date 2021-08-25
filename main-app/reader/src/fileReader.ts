@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import util from 'util';
 
-const dir = '/usr/src/app';
+const dir = '/tmp';
 const fileName = 'timestamp.txt';
 const filePath = path.join(dir, fileName);
 

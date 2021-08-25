@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const dir = '/usr/src/app';
+const dir = '/tmp';
 
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });
