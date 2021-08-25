@@ -1,21 +1,20 @@
 import fs from 'fs';
 import path from 'path';
+import util from 'util';
 
 const dir = '/usr/src/app';
 const fileName = 'timestamp.txt';
 const filePath = path.join(dir, fileName);
 
-// This reads the file just fine, but for some goddamn reason
-// Express router just couldn't handle it.
-const readTimestampAsync = async (): Promise<string | void> => {
-  fs.readFile(filePath, 'utf8', (e, data) => {
-    if (e) {
-      return console.log('error writing file:', e);
-    }
-    return data;
-  });
+const readFile = util.promisify(fs.readFile);
+
+const readTimestamp = async (): Promise<string> => {
+  try {
+    return await readFile(filePath, 'utf8');
+  } catch (e) {
+    console.log('Could not read file', e);
+    return '';
+  }
 };
 
-const readTimestamp = (): string => fs.readFileSync(filePath, 'utf8');
-
-export default { readTimestamp, readTimestampAsync };
+export default { readTimestamp };
