@@ -2,7 +2,7 @@ import express from 'express';
 import writer from './timestampWriter';
 
 const app = express();
-const port = 8080;
+const port = 8081;
 
 // Routes
 app.get('/', (_req, res) => {
