@@ -15,10 +15,3 @@ spec:
             name: todo-backend-svc
             port:
               number: 1234
-      - path: /pingpong
-        pathType: Prefix
-        backend:
-          service:
-            name: pingpong-svc
-            port:
-              number: 1234
