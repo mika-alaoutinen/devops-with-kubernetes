@@ -9,7 +9,7 @@ app.get('/reader', (_req, res) => {
   res.send('This is Main App Reader');
 });
 
-app.use('/hash', hashRoute);
+app.use('/reader/hash', hashRoute);
 
 // start the Express server
 app.listen(port, () => {

@@ -4,17 +4,28 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
   name: main-app-ingress
+
 spec:
   rules:
   - http:
       paths:
-      - path: /
+
+      - path: /reader
         pathType: Prefix
         backend:
           service:
-            name: main-app-svc
+            name: main-app-reader-svc
             port:
               number: 1234
+
+      - path: /writer
+        pathType: Prefix
+        backend:
+          service:
+            name: main-app-writer-svc
+            port:
+              number: 1234
+
       - path: /pingpong
         pathType: Prefix
         backend:
