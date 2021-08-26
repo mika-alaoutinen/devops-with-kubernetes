@@ -24,13 +24,10 @@ spec:
           volumeMounts:
             - name: timestamp
               mountPath: /tmp
+            - name: pingcount
+              mountPath: /tmp/kube
         - name: main-app-writer
           image: mikaalaoutinen/main-app-writer:latest
           volumeMounts:
             - name: timestamp
               mountPath: /tmp
-        - name: pingpong
-          image: mikaalaoutinen/pingpong:latest
-          volumeMounts:
-            - name: pingcount
-              mountPath: /tmp/kube

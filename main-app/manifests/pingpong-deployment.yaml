@@ -12,6 +12,13 @@ spec:
       labels:
         app: pingpong
     spec:
+      volumes:
+        - name: pingcount
+          persistentVolumeClaim:
+            claimName: pingcount-pvc
       containers:
         - name: pingpong
           image: mikaalaoutinen/pingpong:latest
+          volumeMounts:
+            - name: pingcount
+              mountPath: /tmp/kube
