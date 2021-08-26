@@ -1,13 +1,15 @@
 import express from 'express';
-import hashGen from '../HashGenerator';
+import logger from '../logger';
 import fileReader from '../fileReader';
 
 const router = express.Router();
 
 router.get('/', async (_req, res) => {
   const timestamp = await fileReader.readTimestamp();
-  return timestamp
-    ? res.send(hashGen.addHash(timestamp))
+  const pingcount = await fileReader.readPings();
+
+  return timestamp && pingcount
+    ? res.send(logger.write(timestamp, pingcount))
     : res.send('unable to read file');
 });
 
