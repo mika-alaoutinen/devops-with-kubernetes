@@ -5,8 +5,8 @@ const app = express();
 const port = 8081;
 
 // Routes
-app.get('/', (_req, res) => {
-  res.send('Hello from Main App Writer!');
+app.get('/writer', (_req, res) => {
+  res.send('This is Main App Writer');
 });
 
 // start the Express server

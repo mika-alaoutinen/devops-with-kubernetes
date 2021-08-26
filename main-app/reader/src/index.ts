@@ -5,8 +5,8 @@ const app = express();
 const port = 8080;
 
 // Routes
-app.get('/', (_req, res) => {
-  res.send('Hello from Main App Reader!');
+app.get('/reader', (_req, res) => {
+  res.send('This is Main App Reader');
 });
 
 app.use('/hash', hashRoute);
