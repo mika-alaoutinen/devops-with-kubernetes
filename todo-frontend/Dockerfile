@@ -17,9 +17,9 @@ RUN npm i --only=production
 RUN npm i -g serve
 COPY --from=build /app/dist ./dist
 
-RUN addgroup -g 1001 -S appuser
-RUN adduser -u 1001 -S appuser -G appuser
-USER appuser
+# RUN addgroup -g 1001 -S appuser
+# RUN adduser -u 1001 -S appuser -G appuser
+# USER appuser
 
 EXPOSE 3000
 

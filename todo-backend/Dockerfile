@@ -16,9 +16,9 @@ COPY package*.json .
 RUN npm i --only=production
 COPY --from=build /app/dist ./dist
 
-RUN addgroup -g 1001 -S appuser
-RUN adduser -u 1001 -S appuser -G appuser
-USER appuser
+# RUN addgroup -g 1001 -S appuser
+# RUN adduser -u 1001 -S appuser -G appuser
+# USER appuser
 
 EXPOSE 8080
 
