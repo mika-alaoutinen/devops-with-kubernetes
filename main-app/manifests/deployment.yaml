@@ -15,6 +15,9 @@ spec:
       volumes:
         - name: timestamp
           emptyDir: {}
+        - name: pingcount
+          persistentVolumeClaim:
+            claimName: pingcount-pvc
       containers:
         - name: main-app-reader
           image: mikaalaoutinen/main-app-reader:latest
@@ -26,3 +29,8 @@ spec:
           volumeMounts:
             - name: timestamp
               mountPath: /tmp
+        - name: pingpong
+          image: mikaalaoutinen/pingpong:latest
+          volumeMounts:
+            - name: pingcount
+              mountPath: /tmp/kube
