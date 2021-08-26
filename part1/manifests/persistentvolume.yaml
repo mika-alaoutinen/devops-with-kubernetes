@@ -10,7 +10,7 @@ spec:
   accessModes:
   - ReadWriteOnce
   local:
-    path: /tmp/kube
+    path: /storage
   nodeAffinity:
     required:
       nodeSelectorTerms:
