@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const dir = '/tmp';
+const dir = '/tmp/kube';
 
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir, { recursive: true });

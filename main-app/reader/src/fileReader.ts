@@ -2,10 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import util from 'util';
 
-const dir = '/tmp';
 const readFile = util.promisify(fs.readFile);
 
 const readPings = async (): Promise<string> => {
+  const dir = '/tmp/kube';
   const filePath = path.join(dir, 'pingcount.txt');
 
   try {
@@ -17,6 +17,7 @@ const readPings = async (): Promise<string> => {
 };
 
 const readTimestamp = async (): Promise<string> => {
+  const dir = '/tmp';
   const filePath = path.join(dir, 'timestamp.txt');
 
   try {
