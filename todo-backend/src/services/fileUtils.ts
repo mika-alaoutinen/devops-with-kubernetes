@@ -6,7 +6,9 @@ import { promisify } from 'util';
 const finished = promisify(stream.finished);
 const readFile = promisify(fs.readFile);
 
-const checkFileExists = async (dir: string, imageName: string) => new Promise((res) => {
+const checkFileExists = async (
+  dir: string, imageName: string,
+): Promise<boolean> => new Promise((res) => {
   const filePath = path.join(dir, imageName);
 
   fs.stat(filePath, (err, stats) => ((err || !stats)
@@ -25,7 +27,7 @@ const readImage = async (dir: string, imageName: string): Promise<string> => {
   }
 };
 
-const writeImage = async (imageData: any, outputDir: string) => {
+const writeImage = async (imageData: any, outputDir: string): Promise<void> => {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
