@@ -1,33 +1,9 @@
-import * as stream from 'stream';
 import axios from 'axios';
-import fs from 'fs';
-import path from 'path';
-import { promisify } from 'util';
-// import fileUtils from './fileUtils';
-
-const finished = promisify(stream.finished);
+import fileUtils from './fileUtils';
 
 // const dir = path.join('/', 'tmp', 'images');
 const dir = './images';
-const filename = 'image.jpg';
-const filePath = path.join(dir, filename);
-
-const downloadFile = async (url: string, outputPath: string): Promise<any> => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-
-  const writer = fs.createWriteStream(outputPath);
-
-  return axios({
-    method: 'get',
-    url,
-    responseType: 'stream',
-  }).then(async (response) => {
-    response.data.pipe(writer);
-    return finished(writer);
-  });
-};
+const imageUrl = 'https://picsum.photos/1200';
 
 // const fetchImage = async (url: string): Promise<any> => {
 //   const fileExists = await fileUtils.checkFileExists(filePath);
@@ -42,9 +18,9 @@ const downloadFile = async (url: string, outputPath: string): Promise<any> => {
 //   return image;
 // };
 
-const fetchRandomImage = async (): Promise<any> => {
-  const url = 'https://picsum.photos/1200';
-  downloadFile(url, filePath);
+const fetchImage = async (): Promise<void> => {
+  const response = await axios.get(imageUrl, { responseType: 'stream' });
+  fileUtils.writeImage(response.data, dir);
 };
 
-export default { fetchRandomImage };
+export default { fetchImage };

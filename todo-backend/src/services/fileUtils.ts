@@ -1,7 +1,10 @@
+import * as stream from 'stream';
 import fs from 'fs';
-import util from 'util';
+import path from 'path';
+import { promisify } from 'util';
 
-const readFile = util.promisify(fs.readFile);
+const finished = promisify(stream.finished);
+const readFile = promisify(fs.readFile);
 
 const checkFileExists = async (filePath: string) => new Promise((res) => {
   fs.stat(filePath, (err, stats) => ((err || !stats)
@@ -18,8 +21,17 @@ const readImage = async (filePath: string): Promise<string> => {
   }
 };
 
-const writeImage = async (image: any, filePath: string) => {
-  image.pipe(fs.createWriteStream(filePath));
+const writeImage = async (imageData: any, outputDir: string) => {
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  const filePath = path.join(outputDir, 'image.jpg');
+  const writer = fs.createWriteStream(filePath);
+
+  imageData.pipe(writer);
+
+  return finished(writer);
 };
 
 export default { checkFileExists, readImage, writeImage };
