@@ -6,13 +6,17 @@ import { promisify } from 'util';
 const finished = promisify(stream.finished);
 const readFile = promisify(fs.readFile);
 
-const checkFileExists = async (filePath: string) => new Promise((res) => {
+const checkFileExists = async (dir: string, imageName: string) => new Promise((res) => {
+  const filePath = path.join(dir, imageName);
+
   fs.stat(filePath, (err, stats) => ((err || !stats)
     ? res(false)
     : res(true)));
 });
 
-const readImage = async (filePath: string): Promise<string> => {
+const readImage = async (dir: string, imageName: string): Promise<string> => {
+  const filePath = path.join(dir, imageName);
+
   try {
     return await readFile(filePath, 'utf8');
   } catch (e) {
