@@ -12,7 +12,6 @@ const sendImageAsHtml = (image: Buffer, res: Response): void => {
 
 router.get('/', async (_req, res) => {
   const image = await imageService.fetchImage();
-  console.log(image);
   sendImageAsHtml(image, res);
 });
 
