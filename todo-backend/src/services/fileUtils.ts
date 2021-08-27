@@ -1,4 +1,4 @@
-import * as stream from 'stream';
+import stream from 'stream';
 import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
@@ -26,7 +26,11 @@ const readImage = async (dir: string, imageName: string): Promise<Buffer> => {
   }
 };
 
-const writeImage = async (imageData: any, outputDir: string, imageName: string): Promise<void> => {
+const writeImage = async (
+  imageData: stream,
+  outputDir: string,
+  imageName: string,
+): Promise<void> => {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }

@@ -1,3 +1,4 @@
+import stream from 'stream';
 import axios from 'axios';
 import fileUtils from './fileUtils';
 
@@ -7,7 +8,7 @@ const imageName = 'image.jpg';
 const imageUrl = 'https://picsum.photos/1200';
 
 const fetchAndSaveImage = async (): Promise<void> => {
-  const response = await axios.get(imageUrl, { responseType: 'stream' });
+  const response = await axios.get<stream>(imageUrl, { responseType: 'stream' });
   await fileUtils.writeImage(response.data, dir, imageName);
 };
 
