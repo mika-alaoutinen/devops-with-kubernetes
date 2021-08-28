@@ -1,5 +1,5 @@
 <template>
-  <h1>A random image</h1>
+  <h2>A random image</h2>
   <span class="image-container">
     <img class="image" src="http://localhost:8081/api/image" />
   </span>
