@@ -3,7 +3,7 @@
     "main-app/reader",
     "main-app/writer",
     "pingpong",
-    "todo-backend",
-    "todo-frontend"
+    "todo-app/backend",
+    "todo-app/frontend"
   ]
 }
