@@ -1,21 +1,12 @@
 <template>
   <h1>A random image</h1>
-  <img :src="imgSource" />
+  <img src="http://localhost:8080/image" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import imageService from '@/services/imageService';
 
 export default defineComponent({
   name: 'Greeting',
-  data() {
-    return {
-      imgSource: '',
-    };
-  },
-  async mounted() {
-    this.imgSource = await imageService.fetchImage();
-  },
 });
 </script>
