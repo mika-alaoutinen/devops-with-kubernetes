@@ -16,8 +16,8 @@ export default defineComponent({
 
 <style>
 .image {
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 35%;
+  max-height: 35%;
 }
 
 .image-container {
