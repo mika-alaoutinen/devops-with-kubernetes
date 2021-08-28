@@ -2,6 +2,7 @@
   <div class="home">
     <Greeting />
     <Image />
+    <Input />
   </div>
 </template>
 
@@ -9,9 +10,10 @@
 import { defineComponent } from 'vue';
 import Greeting from '@/components/Greeting.vue';
 import Image from '@/components/Image.vue';
+import Input from '@/components/Input.vue';
 
 export default defineComponent({
   name: 'Home',
-  components: { Greeting, Image },
+  components: { Greeting, Image, Input },
 });
 </script>

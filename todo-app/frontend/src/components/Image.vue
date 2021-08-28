@@ -1,6 +1,8 @@
 <template>
   <h1>A random image</h1>
-  <img src="http://localhost:8081/api/image" />
+  <span class="image-container">
+    <img class="image" src="http://localhost:8081/api/image" />
+  </span>
   <!-- <img src="http://todo-backend-svc/api/image" /> -->
 </template>
 
@@ -11,3 +13,14 @@ export default defineComponent({
   name: 'Image',
 });
 </script>
+
+<style>
+.image {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+.image-container {
+  display: block;
+}
+</style>
