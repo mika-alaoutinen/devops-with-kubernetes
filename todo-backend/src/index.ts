@@ -1,8 +1,10 @@
+import cors from 'cors';
 import express from 'express';
 import imageRoute from './routes/image';
 
-const app = express();
 const port = 8080;
+const app = express();
+app.use(cors());
 
 // Routes
 app.get('/', (_req, res) => {
