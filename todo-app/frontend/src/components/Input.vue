@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import service from '@/services/todoService';
+import { Todo } from '@/types';
 
 export default defineComponent({
   name: 'Input',
@@ -14,11 +14,13 @@ export default defineComponent({
       todoText: '',
     };
   },
+  emits: ['addTodo'],
   methods: {
     async addTodo(): Promise<void> {
       if (this.isValid(this.todoText)) {
-        const saved = await service.saveTodo({ message: this.todoText });
-        console.log('saved todo', saved);
+        const newTodo: Todo = { message: this.todoText };
+        this.$emit('addTodo', newTodo);
+        this.todoText = '';
       } else {
         console.log('invalid todo');
       }

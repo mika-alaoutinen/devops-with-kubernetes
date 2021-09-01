@@ -1,6 +1,6 @@
 <template>
   <div class="todos">
-    <Input />
+    <Input @addTodo="saveTodo" />
     <TodoList :todos="todos" />
   </div>
 </template>
@@ -12,7 +12,6 @@ import TodoList from '@/components/TodoList.vue';
 import service from '@/services/todoService';
 import { Todo } from '@/types';
 
-// Need to figure out how to maintain todo state here in this component.
 export default defineComponent({
   name: 'Todos',
   components: { Input, TodoList },
@@ -22,8 +21,9 @@ export default defineComponent({
     };
   },
   methods: {
-    saveTodo() {
-      console.log('saving todo');
+    async saveTodo(newTodo: Todo) {
+      const saved = await service.saveTodo(newTodo);
+      this.todos.push(saved);
     },
   },
   async mounted() {
