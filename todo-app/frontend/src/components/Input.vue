@@ -5,6 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import service from '@/services/todoService';
 
 export default defineComponent({
   name: 'Input',
@@ -16,7 +17,7 @@ export default defineComponent({
   methods: {
     addTodo(): void {
       if (this.isValid(this.todoText)) {
-        console.log('Adding a todo', this.todoText);
+        service.saveTodo({ message: this.todoText });
       } else {
         console.log('Invalid todo');
       }

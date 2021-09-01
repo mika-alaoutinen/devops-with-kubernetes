@@ -14,4 +14,14 @@ const fetchAllTodos = async (): Promise<Todo[]> => {
   }
 };
 
-export default { fetchAllTodos };
+const saveTodo = async (todo: Todo): Promise<Todo> => {
+  try {
+    const response = await axios.post(todosUrl, todo);
+    return response.data;
+  } catch (error) {
+    console.log('error saving todo', error);
+    return Promise.resolve(todo);
+  }
+};
+
+export default { fetchAllTodos, saveTodo };
