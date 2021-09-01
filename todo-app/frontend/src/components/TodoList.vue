@@ -1,17 +1,26 @@
 <template>
   <div class="todo-list-container">
     <ul class="todo-list">
-      <li class="todo-item">Todo 1</li>
-      <li class="todo-item">Todo 2</li>
+      <li v-for="todo in todos" :key="todo.message">{{ todo.message }}</li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import service from '@/services/todoService';
+import { Todo } from '@/types';
 
 export default defineComponent({
   name: 'TodoList',
+  data() {
+    return {
+      todos: [] as Todo[],
+    };
+  },
+  async mounted() {
+    this.todos = await service.fetchAllTodos();
+  },
 });
 </script>
 

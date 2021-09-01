@@ -1,16 +1,19 @@
 <template>
   <h2>A random image</h2>
   <span class="image-container">
-    <!-- With cluster-internal routing the URL would be this: http://todo-backend-svc/api/image -->
-    <img class="image" src="http://localhost:8081/api/image" />
+    <img class="image" :src="imageSrc" />
   </span>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { backendUrl } from '@/environment';
 
 export default defineComponent({
   name: 'Image',
+  computed: {
+    imageSrc: () => `${backendUrl}/image`,
+  },
 });
 </script>
 
