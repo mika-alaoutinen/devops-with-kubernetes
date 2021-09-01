@@ -7,7 +7,7 @@ let counter = 0;
 router.get('/', (_req, res) => {
   counter += 1;
   filewriter.write(counter.toString());
-  res.send(`pong ${counter}`);
+  res.send(counter.toString());
 });
 
 export default router;
