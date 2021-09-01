@@ -1,9 +1,9 @@
 <template>
   <h2>A random image</h2>
   <span class="image-container">
+    <!-- With cluster-internal routing the URL would be this: http://todo-backend-svc/api/image -->
     <img class="image" src="http://localhost:8081/api/image" />
   </span>
-  <!-- <img src="http://todo-backend-svc/api/image" /> -->
 </template>
 
 <script lang="ts">

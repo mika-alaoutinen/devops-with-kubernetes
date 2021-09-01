@@ -3,15 +3,24 @@ kind: Ingress
 metadata:
   annotations:
     traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
-  name: todo-backend-ingress
+  name: todo-app-ingress
 spec:
   rules:
   - http:
       paths:
+
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: todo-frontend-svc
+            port:
+              number: 1234
+
       - path: /api
         pathType: Prefix
         backend:
           service:
             name: todo-backend-svc
             port:
-              number: 80
+              number: 1234

@@ -26,6 +26,7 @@ Might also want to try out [this script](https://github.com/microsoft/WSL/issues
 Enter a running pod and run Shell
 ```
 kubectl exec --stdin --tty main-app-dep-7b4695544c-czg4z -c main-app-reader -- /bin/sh
+wget -qO - http://google.fi
 ```
 
 ---
