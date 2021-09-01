@@ -15,11 +15,12 @@ export default defineComponent({
     };
   },
   methods: {
-    addTodo(): void {
+    async addTodo(): Promise<void> {
       if (this.isValid(this.todoText)) {
-        service.saveTodo({ message: this.todoText });
+        const saved = await service.saveTodo({ message: this.todoText });
+        console.log('saved todo', saved);
       } else {
-        console.log('Invalid todo');
+        console.log('invalid todo');
       }
     },
     isValid(todo: string): boolean {

@@ -8,19 +8,10 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import service from '@/services/todoService';
-import { Todo } from '@/types';
 
 export default defineComponent({
   name: 'TodoList',
-  data() {
-    return {
-      todos: [] as Todo[],
-    };
-  },
-  async mounted() {
-    this.todos = await service.fetchAllTodos();
-  },
+  props: ['todos'],
 });
 </script>
 
