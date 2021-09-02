@@ -4,6 +4,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
   name: todo-app-ingress
+  namespace: todo
 spec:
   rules:
   - http:
