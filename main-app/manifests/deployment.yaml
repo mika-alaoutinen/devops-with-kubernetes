@@ -22,6 +22,9 @@ spec:
       containers:
         - name: main-app-reader
           image: mikaalaoutinen/main-app-reader:latest
+          envFrom:
+            - configMapRef:
+                name: main-app-reader-configmap
           volumeMounts:
             - name: timestamp
               mountPath: /tmp
