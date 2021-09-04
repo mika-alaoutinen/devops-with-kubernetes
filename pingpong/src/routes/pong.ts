@@ -1,5 +1,6 @@
 import express from 'express';
 import filewriter from '../filewriter';
+import pingService from '../services/pingService';
 
 const router = express.Router();
 let counter = 0;
@@ -7,6 +8,7 @@ let counter = 0;
 router.get('/', (_req, res) => {
   counter += 1;
   filewriter.write(counter.toString());
+  pingService.savePing();
   res.send(counter.toString());
 });
 
