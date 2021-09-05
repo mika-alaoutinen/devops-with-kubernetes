@@ -29,7 +29,7 @@ spec:
           containerPort: 5432
         volumeMounts:
         - name: postgres-data
-          mountPath: /var/lib/postgresql/data
+          mountPath: /data
 
   # Storageclass from k3d
   volumeClaimTemplates:

@@ -2,14 +2,12 @@ apiVersion: v1
 kind: ConfigMap
 
 metadata:
-  name: postgres-configmap
+  name: pingpong-configmap
   namespace: main
   labels:
-    app: postgres
+    app: pingpong
 
 data:
-  # TODO sealeadSecrets
-  # POSTGRES_HOST: localhost
   POSTGRES_NAME: pingpong
   POSTGRES_USER: admin
   POSTGRES_PASSWORD: admin

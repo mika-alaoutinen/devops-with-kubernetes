@@ -3,8 +3,8 @@ declare global {
     export interface ProcessEnv {
       POSTGRES_USER: string;
       POSTGRES_PASSWORD: string;
-      POSTGRES_NAME?: string;
       POSTGRES_HOST?: string;
+      POSTGRES_DATABASE?: string;
     }
   }
 }

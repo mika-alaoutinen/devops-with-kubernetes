@@ -8,10 +8,10 @@ metadata:
     app: postgres
 
 spec:
-  ports:
-  - name: db-port
-    port: 5432
-  # clusterIP: None denotes a "headless service"
   clusterIP: None
   selector:
     app: postgres
+  ports:
+  - name: db-port
+    port: 5432
+    targetPort: 5432
