@@ -1,7 +1,7 @@
 import pool from './pool';
 
 const insertPing = async (timestamp: string): Promise<void> => {
-  pool.query('insert into pings (timestamp) values ($1)', [timestamp], (error, results) => {
+  pool.query('INSERT INTO pings (timestamp) VALUES ($1)', [timestamp], (error, results) => {
     if (error) {
       console.log('error querying pings', error);
       throw error;
