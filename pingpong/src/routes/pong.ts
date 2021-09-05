@@ -3,13 +3,11 @@ import filewriter from '../filewriter';
 import pingService from '../services/pingService';
 
 const router = express.Router();
-let counter = 0;
 
-router.get('/', (_req, res) => {
-  counter += 1;
-  filewriter.write(counter.toString());
-  pingService.savePing();
-  res.send(counter.toString());
+router.get('/', async (_req, res) => {
+  const count = await pingService.savePing();
+  filewriter.write(count.toString());
+  res.send(count.toString());
 });
 
 export default router;
