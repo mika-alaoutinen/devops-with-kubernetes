@@ -7,7 +7,6 @@ const insertPing = async (timestamp: string): Promise<Ping> => {
 
   try {
     const response = await pool.query(sql, [timestamp]);
-    console.log('insert response', response);
     return response.rows[0];
   } catch (error) {
     console.log('error querying pings', error);

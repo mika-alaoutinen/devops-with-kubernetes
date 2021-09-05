@@ -4,10 +4,10 @@ import { Pool } from 'pg';
 dotenv.config();
 
 const pool = new Pool({
-  database: process.env.DB_NAME || 'pingpong',
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  database: process.env.POSTGRES_NAME || 'pingpong',
+  host: process.env.POSTGRES_HOST || 'localhost',
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
 });
 
 export default pool;
