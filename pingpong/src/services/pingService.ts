@@ -3,10 +3,8 @@ import timestampService from './timestampService';
 
 const savePing = async (): Promise<number> => {
   const newPing = await queries.insertPing(timestampService.getCurrentTimeStamp());
-
-  const timestamp = timestampService.formatTimestamp(newPing.timestamp);
-  console.info('timestamp', timestamp);
-
+  // Don't need to return newPing, however it could be done
+  timestampService.formatTimestamp(newPing.timestamp);
   return queries.pingCount();
 };
 
