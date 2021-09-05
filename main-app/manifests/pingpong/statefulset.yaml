@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: postgres-statefulset
+  namespace: main
+  labels:
+    app: postgres
+
+spec:
+  serviceName: postgres-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres
+        envFrom:
+        - configMapRef:
+            name: postgres-configmap
+        ports:
+        - name: db-port
+          containerPort: 5432
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+
+  # Storageclass from k3d
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 100Mi
