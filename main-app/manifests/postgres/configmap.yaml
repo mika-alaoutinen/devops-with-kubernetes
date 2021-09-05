@@ -8,15 +8,7 @@ metadata:
     app: postgres
 
 data:
-  create_db.sql: |
-    CREATE DATABASE pingpong WITH
-    ENCODING = 'UTF-8'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
-
-    \c pingpong;
-
-    CREATE TABLE IF NOT EXISTS pings (
-      id SERIAL PRIMARY KEY,
-      timestamp timestamp NOT NULL
-    );
+  POSTGRES_DATABASE: pingpong
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: admin
+  PGDATA: /var/lib/postgresql/data/pgdata
