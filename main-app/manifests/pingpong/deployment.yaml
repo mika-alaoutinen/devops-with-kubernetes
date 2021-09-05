@@ -20,6 +20,9 @@ spec:
       containers:
         - name: pingpong
           image: mikaalaoutinen/pingpong:latest
+          envFrom:
+            - configMapRef:
+                name: pingpong-configmap
           # volumeMounts:
           #   - name: pingcount
           #     mountPath: /tmp/kube
