@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+
+metadata:
+  name: hello
+  namespace: todo
+
+spec:
+  # Once a day at midnight
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: daily-todo
+            image: busybox
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - |
+              url=https://en.wikipedia.org/wiki/Special:Random
+              title=$(wget -qO- $url | sed -n -e 's!.*<title>\(.*\)</title>.*!\1!p')
+
+              apiurl=todo-backend-svc/api/todos
+              data='{"message": "'$title'"}'
+              header='Content-Type: application/json'
+
+              wget -O- --post-data="$data" --header="$header" "$apiurl"
+          restartPolicy: OnFailure
