@@ -4,26 +4,22 @@ import service from '../services/todoService';
 
 const router = express.Router();
 
-router.get('/', (_req, res) => {
+router.get('/', async (_req, res) => {
   try {
-    const todos = service.fetchAllTodos();
+    const todos = await service.fetchAllTodos();
     res.send(todos);
   } catch (e) {
-    const errorMsg = `Error fetching all todos ${e}`;
-    console.log(errorMsg);
-    res.send(errorMsg);
+    res.send(`Error fetching all todos ${e}`);
   }
 });
 
-router.post('/', (_req, res) => {
+router.post('/', async (_req, res) => {
   try {
     const newTodo: Todo = _req.body;
-    const saved = service.saveTodo(newTodo);
+    const saved = await service.saveTodo(newTodo);
     res.json(saved);
   } catch (e) {
-    const errorMsg = `Error saving a new todo ${e}`;
-    console.log(errorMsg);
-    res.send(errorMsg);
+    res.send(`Error saving a new todo ${e}`);
   }
 });
 

@@ -1,15 +1,8 @@
+import queries from '../db/queries';
 import { Todo } from '../types';
 
-const todos: Todo[] = [
-  { message: 'Todo note 1' },
-  { message: 'Todo note 2' },
-];
+const fetchAllTodos = async (): Promise<Todo[]> => queries.getAllTodos();
 
-const fetchAllTodos = (): Todo[] => todos;
-
-const saveTodo = (todo: Todo): Todo => {
-  todos.push(todo);
-  return todo;
-};
+const saveTodo = async (todo: Todo): Promise<Todo> => queries.saveTodo(todo);
 
 export default { fetchAllTodos, saveTodo };
