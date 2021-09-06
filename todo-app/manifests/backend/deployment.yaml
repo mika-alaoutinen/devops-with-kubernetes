@@ -16,3 +16,8 @@ spec:
       containers:
         - name: todo-backend
           image: mikaalaoutinen/todo-backend:latest
+          envFrom:
+            - configMapRef:
+                name: todo-backend-configmap
+            - secretRef:
+                name: postgres-credentials
