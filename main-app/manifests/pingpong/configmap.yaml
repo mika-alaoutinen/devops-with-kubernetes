@@ -10,5 +10,3 @@ metadata:
 data:
   POSTGRES_HOST: postgres-svc
   POSTGRES_DATABASE: pingpong
-  POSTGRES_USER: admin
-  POSTGRES_PASSWORD: admin

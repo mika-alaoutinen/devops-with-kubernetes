@@ -23,6 +23,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: pingpong-configmap
+            - secretRef:
+                name: postgres-credentials
           # volumeMounts:
           #   - name: pingcount
           #     mountPath: /tmp/kube

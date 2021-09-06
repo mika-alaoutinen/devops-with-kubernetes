@@ -24,6 +24,8 @@ spec:
         envFrom:
           - configMapRef:
               name: postgres-configmap
+          - secretRef:
+              name: postgres-credentials
         ports:
         - name: db-port
           containerPort: 5432
