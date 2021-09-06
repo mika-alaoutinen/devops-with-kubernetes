@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 
 metadata:
-  name: hello
+  name: daily-todo
   namespace: todo
 
 spec:
@@ -23,7 +23,7 @@ spec:
               url=https://en.wikipedia.org/wiki/Special:Random
               title=$(wget -qO- $url | sed -n -e 's!.*<title>\(.*\)</title>.*!\1!p')
 
-              apiurl=todo-backend-svc/api/todos
+              apiurl=todo-backend-svc:1234/api/todos
               data='{"message": "'$title'"}'
               header='Content-Type: application/json'
 
