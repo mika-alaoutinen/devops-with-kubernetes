@@ -1,6 +1,2 @@
-// Can't be bothered to figure out how environment variables work in Vue
-
-const port = 8081;
-
 // eslint-disable-next-line import/prefer-default-export
-export const backendUrl = `http://localhost:${port}/api/`;
+export const backendUrl = process.env.VUE_APP_BACKEND_URL || 'http://localhost:8081/api';

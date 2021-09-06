@@ -16,3 +16,6 @@ spec:
       containers:
         - name: todo-frontend
           image: mikaalaoutinen/todo-frontend:latest
+          envFrom:
+            - configMapRef:
+                name: todo-frontend-configmap
