@@ -1,0 +1,5 @@
+# Sealed secrets do not work correctly when cluster is deleted.
+# For convenience, add a local secret.yaml file that can easily be
+# converted into a sealed secret.
+secret.yaml
+.env

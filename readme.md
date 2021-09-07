@@ -77,3 +77,22 @@ k3d cluster start
 k3d cluster stop
 k3d cluster delete
 ```
+
+---
+
+## Helm commands
+```
+helm ls --all-namespaces
+helm install chart --generate-name -n namespace
+helm uninstall chart
+```
+
+Note: the course material uses deprecated `helm delete`. The correct command is `uninstall`.
+
+---
+
+## Sealed secrets
+
+```
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.1/controller.yaml
+```
