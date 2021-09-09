@@ -16,8 +16,8 @@ router.get('/', async (_req, res) => {
 router.post('/', async (_req, res) => {
   try {
     const newTodo: Todo = _req.body;
-    const saved = await service.saveTodo(newTodo);
-    res.json(saved);
+    const result = await service.saveTodo(newTodo);
+    res.json(result);
   } catch (e) {
     res.send(`Error saving a new todo ${e}`);
   }
