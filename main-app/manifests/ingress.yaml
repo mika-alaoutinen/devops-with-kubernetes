@@ -4,6 +4,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
   name: main-app-ingress
+  namespace: main
 
 spec:
   rules:

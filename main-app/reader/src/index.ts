@@ -1,15 +1,14 @@
+import dotenv from 'dotenv';
 import express from 'express';
-import hashRoute from './routes/hash';
+import routes from './routes/routes';
+
+dotenv.config();
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // Routes
-app.get('/reader', (_req, res) => {
-  res.send('This is Main App Reader');
-});
-
-app.use('/reader/hash', hashRoute);
+app.use('/reader', routes);
 
 // start the Express server
 app.listen(port, () => {

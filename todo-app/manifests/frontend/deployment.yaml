@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-frontend-dep
+  namespace: todo
 spec:
   replicas: 1
   selector:
@@ -15,3 +16,6 @@ spec:
       containers:
         - name: todo-frontend
           image: mikaalaoutinen/todo-frontend:latest
+          envFrom:
+            - configMapRef:
+                name: todo-frontend-configmap

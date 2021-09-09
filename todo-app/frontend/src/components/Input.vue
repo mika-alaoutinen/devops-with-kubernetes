@@ -5,6 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Todo } from '@/types';
 
 export default defineComponent({
   name: 'Input',
@@ -13,12 +14,15 @@ export default defineComponent({
       todoText: '',
     };
   },
+  emits: ['addTodo'],
   methods: {
-    addTodo(): void {
+    async addTodo(): Promise<void> {
       if (this.isValid(this.todoText)) {
-        console.log('Adding a todo', this.todoText);
+        const newTodo: Todo = { message: this.todoText };
+        this.$emit('addTodo', newTodo);
+        this.todoText = '';
       } else {
-        console.log('Invalid todo');
+        console.log('invalid todo');
       }
     },
     isValid(todo: string): boolean {

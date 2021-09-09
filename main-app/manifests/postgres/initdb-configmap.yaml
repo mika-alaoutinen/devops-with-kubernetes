@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: postgres-initdb
+  namespace: main
+  labels:
+    app: postgres
+
+data:
+  create_db.sql: |
+    CREATE DATABASE pingpong WITH
+    ENCODING = 'UTF-8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+    \c pingpong;
+
+    CREATE TABLE IF NOT EXISTS pings (
+      id SERIAL PRIMARY KEY,
+      timestamp timestamp NOT NULL
+    );

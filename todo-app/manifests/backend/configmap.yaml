@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: todo-backend-configmap
+  namespace: todo
+  labels:
+    app: todo-backend
+
+data:
+  POSTGRES_HOST: postgres-svc
+  POSTGRES_DATABASE: todoapp

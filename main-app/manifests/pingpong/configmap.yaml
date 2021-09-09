@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: pingpong-configmap
+  namespace: main
+  labels:
+    app: pingpong
+
+data:
+  POSTGRES_HOST: postgres-svc
+  POSTGRES_DATABASE: pingpong

@@ -1,8 +1,7 @@
 <template>
   <div class="todo-list-container">
     <ul class="todo-list">
-      <li class="todo-item">Todo 1</li>
-      <li class="todo-item">Todo 2</li>
+      <li v-for="todo in todos" :key="todo.message">{{ todo.message }}</li>
     </ul>
   </div>
 </template>
@@ -12,6 +11,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'TodoList',
+  props: ['todos'],
 });
 </script>
 

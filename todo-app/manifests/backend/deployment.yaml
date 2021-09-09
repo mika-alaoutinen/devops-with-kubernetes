@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-backend-dep
+  namespace: todo
 spec:
   replicas: 1
   selector:
@@ -15,3 +16,8 @@ spec:
       containers:
         - name: todo-backend
           image: mikaalaoutinen/todo-backend:latest
+          envFrom:
+            - configMapRef:
+                name: todo-backend-configmap
+            - secretRef:
+                name: postgres-credentials

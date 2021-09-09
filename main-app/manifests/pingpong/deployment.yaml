@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingpong-dep
+  namespace: main
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      # volumes:
+      #   - name: pingcount
+      #     persistentVolumeClaim:
+      #       claimName: pingcount-pvc
+      containers:
+        - name: pingpong
+          image: mikaalaoutinen/pingpong:latest
+          envFrom:
+            - configMapRef:
+                name: pingpong-configmap
+            - secretRef:
+                name: postgres-credentials
+          # volumeMounts:
+          #   - name: pingcount
+          #     mountPath: /tmp/kube
