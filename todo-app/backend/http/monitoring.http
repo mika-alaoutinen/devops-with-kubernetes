@@ -1,0 +1,3 @@
+@monitoring = http://localhost:8080/api/monitoring
+
+GET {{monitoring}}/readiness HTTP/1.1

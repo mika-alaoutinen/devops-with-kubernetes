@@ -10,4 +10,15 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
 });
 
+export const checkConnection = async (): Promise<boolean> => {
+  try {
+    const response = await pool.query('SELECT version()');
+    const dbVersion: string = response.rows[0].version;
+    return dbVersion.includes('PostgreSQL');
+  } catch (error) {
+    console.error('Check database connection failed', error);
+    return false;
+  }
+};
+
 export default pool;

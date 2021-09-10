@@ -21,3 +21,9 @@ spec:
                 name: todo-backend-configmap
             - secretRef:
                 name: postgres-credentials
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /api/monitoring/readiness
+              port: 8080
