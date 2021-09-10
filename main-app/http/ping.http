@@ -7,6 +7,6 @@ GET {{url}} HTTP/1.1
 ### ping count
 GET {{url}}/pingpong HTTP/1.1
 
-### health check
-@health = monitoring/health
-GET {{url}}/{{health}} HTTP/1.1
+### readiness check
+@readiness = monitoring/readiness
+GET {{url}}/{{readiness}} HTTP/1.1

@@ -1,0 +1,11 @@
+@url = http://localhost:8080/reader
+
+### Hello
+GET {{url}} HTTP/1.1
+
+### ping count
+GET {{url}}/hash HTTP/1.1
+
+### health check
+@readiness = monitoring/readiness
+GET {{url}}/{{readiness}} HTTP/1.1

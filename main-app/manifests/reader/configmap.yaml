@@ -5,3 +5,6 @@ metadata:
   namespace: main
 data:
   MESSAGE: Hello
+  PORT: '8080'
+  PINGPONG_READINESS_CHECK: http://pingpong-svc/monitoring/readiness
+  PINGPONG_URL: http://pingpong-svc/pingpong
