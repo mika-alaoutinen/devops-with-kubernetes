@@ -29,7 +29,7 @@ spec:
           #   - name: pingcount
           #     mountPath: /tmp/kube
           readinessProbe:
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
             periodSeconds: 5
             httpGet:
               path: /monitoring/readiness

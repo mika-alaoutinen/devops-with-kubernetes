@@ -26,10 +26,10 @@ spec:
             - configMapRef:
                 name: main-app-reader-configmap
           readinessProbe:
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
             periodSeconds: 5
             httpGet:
-              path: /monitoring/readiness
+              path: /reader/monitoring/readiness
               port: 8080
           volumeMounts:
             - name: timestamp
