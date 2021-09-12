@@ -1,26 +1,26 @@
 <template>
-  <input v-model="todoText" class="todo-input" size="75" />
+  <input v-model="message" class="todo-input" size="75" />
   <button @click="addTodo">Create TODO</button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Todo } from '@/types';
+import { NewTodo } from '@/types';
 
 export default defineComponent({
   name: 'Input',
   data() {
     return {
-      todoText: '',
+      message: '',
     };
   },
   emits: ['addTodo'],
   methods: {
     async addTodo(): Promise<void> {
-      if (this.isValid(this.todoText)) {
-        const newTodo: Todo = { message: this.todoText };
-        this.$emit('addTodo', newTodo);
-        this.todoText = '';
+      if (this.isValid(this.message)) {
+        const todo: NewTodo = { message: this.message };
+        this.$emit('addTodo', todo);
+        this.message = '';
       } else {
         console.log('invalid todo');
       }
