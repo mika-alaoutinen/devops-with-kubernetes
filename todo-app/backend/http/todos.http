@@ -1,12 +1,33 @@
 @todos = http://localhost:8080/api/todos
 
+### get all todos
 GET {{todos}} HTTP/1.1
 
-###
+### save todo
 
 POST {{todos}} HTTP/1.1
 Content-Type: application/json
 
 {
   "message": "new todo"
+}
+
+### update a todo
+PUT {{todos}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "message": "edited todo",
+  "done": "true"
+}
+
+### invalid update on non-existing todo
+PUT {{todos}}/4 HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 4,
+  "message": "edited todo",
+  "done": "true"
 }

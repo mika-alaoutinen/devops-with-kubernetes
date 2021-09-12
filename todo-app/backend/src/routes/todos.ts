@@ -22,4 +22,14 @@ router.post('/', async (req, res: Response<Todo | string>) => {
   }
 });
 
+router.put('/:id', async (req, res: Response<Todo | string>) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const updated = await service.updateTodo(id, req.body);
+    res.json(updated);
+  } catch (e) {
+    res.send(`Error updating a todo ${e}`);
+  }
+});
+
 export default router;
