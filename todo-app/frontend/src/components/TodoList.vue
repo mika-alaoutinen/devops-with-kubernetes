@@ -1,11 +1,12 @@
 <template>
   <div class="todo-list-container">
     <ul class="todo-list">
-      <li v-for="todo in todos" :key="todo.message">
+      <li v-for="todo in todos" :key="todo.id" class="todo-item" :style="todoStyle(todo)">
         {{ todo.message }}
         <input
           @click="$emit('updateTodo', todo.id)"
           :id="todo.id"
+          :checked="todo.done"
           type="checkbox"
         />
       </li>
@@ -15,11 +16,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Todo } from '@/types';
 
 export default defineComponent({
   name: 'TodoList',
   emits: ['updateTodo'],
   props: ['todos'],
+  methods: {
+    todoStyle(todo: Todo): string {
+      return todo.done ? 'color: green' : 'color: red';
+    },
+  },
 });
 </script>
 
@@ -28,7 +35,6 @@ export default defineComponent({
   font-size: large;
 }
 .todo-list {
-  color: red;
   text-align: left;
 }
 .todo-list-container {

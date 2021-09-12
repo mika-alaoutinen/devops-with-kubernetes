@@ -32,7 +32,6 @@ const updateDone = async (todo: Todo): Promise<Todo | string> => {
 
   try {
     const response = await axios.put(`${todosUrl}/${todo.id}`, updated);
-    console.log('response', response);
     return response.data;
   } catch (error) {
     console.log('error updating todo', error);
