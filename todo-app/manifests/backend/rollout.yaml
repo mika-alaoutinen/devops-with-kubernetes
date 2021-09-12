@@ -34,8 +34,8 @@ spec:
             - secretRef:
                 name: postgres-credentials
           readinessProbe:
-            initialDelaySeconds: 10
-            periodSeconds: 5
+            initialDelaySeconds: 15
+            periodSeconds: 10
             httpGet:
               path: /api/monitoring/readiness
               port: 8080
