@@ -9,12 +9,9 @@ spec:
   metrics:
   - name: restart-rate
     initialDelay: 2m
-    successCondition: result < 0.01
+    successCondition: result[0] < 0.001
     provider:
       prometheus:
         address: http://prometheus-stack-kube-prom-prometheus.prometheus:9090
         query: |
-          scalar(
-            sum (rate (container_cpu_usage_seconds_total{namespace="todo"}[1m])) / sum (machine_cpu_cores) * 100 -
-            sum (rate (container_cpu_usage_seconds_total{namespace="todo"}[1m])) / sum (machine_cpu_cores) * 100 offset 2m)
-          )
+          sum (rate (container_cpu_usage_seconds_total{namespace="todo"}[10m])) / sum (machine_cpu_cores) * 100
