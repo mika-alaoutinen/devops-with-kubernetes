@@ -1,5 +1,5 @@
 import client from './pool';
-import { Todo } from '../types';
+import { NewTodo, Todo } from '../types';
 
 const getAllTodos = async (): Promise<Todo[]> => {
   const sql = 'SELECT * FROM todos';
@@ -12,7 +12,7 @@ const getAllTodos = async (): Promise<Todo[]> => {
   }
 };
 
-const saveTodo = async ({ message }: Todo): Promise<Todo> => {
+const saveTodo = async ({ message }: NewTodo): Promise<Todo> => {
   const sql = 'INSERT INTO todos (message) VALUES ($1) RETURNING *';
 
   try {
