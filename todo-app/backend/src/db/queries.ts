@@ -1,5 +1,5 @@
 import client from './pool';
-import { NewTodo, Todo } from '../types';
+import { Todo, UnsavedTodo } from '../types';
 
 const existsById = async (id: number): Promise<boolean> => {
   const sql = 'SELECT id FROM todos WHERE id = ($1)';
@@ -24,7 +24,7 @@ const getAllTodos = async (): Promise<Todo[]> => {
   }
 };
 
-const saveTodo = async ({ message }: NewTodo): Promise<Todo> => {
+const saveTodo = async ({ message }: UnsavedTodo): Promise<Todo> => {
   const sql = `INSERT INTO
     todos (done, message)
     VALUES (false, ($1))

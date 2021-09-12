@@ -4,4 +4,6 @@ export interface Todo {
   message: string
 }
 
-export type NewTodo = Omit<Todo, 'id'>
+export type NewTodo = Pick<Todo, 'message'>
+
+export type UnsavedTodo = Omit<Todo, 'id'>

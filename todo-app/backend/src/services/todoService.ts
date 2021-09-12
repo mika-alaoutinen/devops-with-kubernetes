@@ -1,12 +1,12 @@
 import queries from '../db/queries';
-import { NewTodo, Todo } from '../types';
+import { NewTodo, Todo, UnsavedTodo } from '../types';
 
 const isTodoValid = ({ message }: NewTodo): boolean => message.length <= 140;
 
 const fetchAllTodos = async (): Promise<Todo[]> => queries.getAllTodos();
 
 const saveTodo = async (newTodo: NewTodo): Promise<Todo | string> => {
-  const todo: NewTodo = {
+  const todo: UnsavedTodo = {
     done: false,
     message: newTodo.message,
   };
