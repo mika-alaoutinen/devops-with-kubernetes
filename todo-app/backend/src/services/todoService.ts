@@ -1,4 +1,5 @@
 import queries from '../db/queries';
+import nats from '../messaging/nats';
 import { NewTodo, Todo, UnsavedTodo } from '../types';
 
 const isTodoValid = ({ message }: NewTodo): boolean => message.length <= 140;
@@ -11,9 +12,14 @@ const saveTodo = async (newTodo: NewTodo): Promise<Todo | string> => {
     message: newTodo.message,
   };
 
-  return isTodoValid(todo)
-    ? queries.saveTodo(todo)
-    : 'Invalid todo! Message is too long.';
+  if (!isTodoValid(todo)) {
+    return 'Invalid todo! Message is too long.';
+  }
+
+  const persisted = await queries.saveTodo(todo);
+  nats.send(persisted);
+
+  return persisted;
 };
 
 const updateTodo = async (id: number, updatedTodo: Todo): Promise<Todo | string> => {
@@ -27,9 +33,14 @@ const updateTodo = async (id: number, updatedTodo: Todo): Promise<Todo | string>
     id,
   };
 
-  return isTodoValid(todo)
-    ? queries.updateTodo(todo)
-    : 'Invalid todo! Message is too long.';
+  if (!isTodoValid(todo)) {
+    return 'Invalid todo! Message is too long.';
+  }
+
+  const persisted = await queries.updateTodo(todo);
+  nats.send(persisted);
+
+  return persisted;
 };
 
 export default { fetchAllTodos, saveTodo, updateTodo };
