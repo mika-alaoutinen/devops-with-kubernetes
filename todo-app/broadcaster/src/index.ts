@@ -1,6 +1,7 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
+import nats from './nats';
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ app.use(express.json());
 app.get('/', (_req, res) => {
   res.send('Hello from Broadcaster!');
 });
+
+nats.readMessage();
 
 app.listen(port, () => {
   console.log(`Broadcaster started in port ${port}`);
