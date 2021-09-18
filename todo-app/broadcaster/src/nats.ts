@@ -1,6 +1,6 @@
 import { connect, NatsConnection, Subscription } from 'nats';
 import { decodeMessage, parseMessage } from './messageUtils';
-import { Message, Subject } from '../../todo-types';
+import { Subject } from '../../todo-types';
 
 const url = process.env.NATS_URL || 'nats://localhost:4222';
 
@@ -13,29 +13,25 @@ const getConnection = async (): Promise<NatsConnection> => {
   }
 };
 
-const subscribe = async (...subjects: Subject[]): Promise<Subscription[]> => {
+const subscribe = async (subject: Subject): Promise<Subscription> => {
   const nc = await getConnection();
-  return subjects.map((s) => nc.subscribe(s));
+  return nc.subscribe(subject);
 };
 
 // Straight from nats' own documentation. No idea how else to do this.
-const readMessagesLoop = async (sub: Subscription): Promise<Message | string> => {
+const handleMessage = async (sub: Subscription) => {
+  console.log(`listening for ${sub.getSubject()}`);
+
   // eslint-disable-next-line no-restricted-syntax
   for await (const msg of sub) {
-    return parseMessage(msg);
+    const message = decodeMessage(sub.getProcessed(), parseMessage(msg));
+    console.log(message);
   }
-  return 'subscription closed';
 };
 
-// Read messages from NATS
 const readMessages = async (): Promise<void> => {
-  const subscriptions = await subscribe('TODO_ADDED', 'TODO_UPDATED');
-  const sub = subscriptions[0];
-
-  const msg = await readMessagesLoop(sub);
-  if (typeof msg !== 'string') {
-    console.log(decodeMessage(sub.getProcessed(), msg));
-  }
+  handleMessage(await subscribe('TODO_ADDED'));
+  handleMessage(await subscribe('TODO_UPDATED'));
 };
 
 export default { readMessages };
