@@ -9,7 +9,7 @@ const connectToNats = async () => {
   const subscription = nc.subscribe('hello');
 
   (async () => {
-    const numberOfProcessed = subscription.getProcessed();
+    console.log(subscription.getProcessed());
     console.log('subscription closed');
   })();
 };
