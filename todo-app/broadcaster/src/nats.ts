@@ -1,6 +1,6 @@
 import { connect, NatsConnection, Subscription } from 'nats';
 import messageService from './messageService';
-import { decodeMessage, parseMessage } from './messageUtils';
+import { logMessage, parseMessage } from './messageUtils';
 import { Subject } from '../../todo-types';
 
 const url = process.env.NATS_URL || 'nats://localhost:4222';
@@ -25,9 +25,9 @@ const handleMessage = async (sub: Subscription) => {
 
   // eslint-disable-next-line no-restricted-syntax
   for await (const msg of sub) {
-    const message = decodeMessage(sub.getProcessed(), parseMessage(msg));
-    console.log(message);
+    const message = parseMessage(msg);
     messageService.sendMessage(message);
+    logMessage(sub.getProcessed(), message);
   }
 };
 

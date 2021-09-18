@@ -1,6 +1,10 @@
 import { Msg, StringCodec } from 'nats';
 import { Message } from '../../todo-types';
 
+export const logMessage = (idx: number, msg: Message): void => {
+  console.log(`[${idx}] ${JSON.stringify(msg)}`);
+};
+
 export const parseMessage = (msg: Msg): Message => {
   const data = StringCodec().decode(msg.data);
 
@@ -11,5 +15,3 @@ export const parseMessage = (msg: Msg): Message => {
     throw error;
   }
 };
-
-export const decodeMessage = (idx: number, msg: Message): string => `[${idx}] ${JSON.stringify(msg)}`;

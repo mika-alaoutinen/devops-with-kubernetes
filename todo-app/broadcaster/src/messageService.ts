@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { Message } from '../../todo-types';
 
 const url = process.env.CHAT_SERVICE_URL || 'http://localhost:8000/echo';
 
-const sendMessage = async (msg: string): Promise<void> => {
+const sendMessage = async (msg: Message): Promise<void> => {
   try {
     await axios.post(url, msg);
   } catch (error) {
