@@ -1,4 +1,5 @@
 import { connect, NatsConnection, Subscription } from 'nats';
+import messageService from './messageService';
 import { decodeMessage, parseMessage } from './messageUtils';
 import { Subject } from '../../todo-types';
 
@@ -26,6 +27,7 @@ const handleMessage = async (sub: Subscription) => {
   for await (const msg of sub) {
     const message = decodeMessage(sub.getProcessed(), parseMessage(msg));
     console.log(message);
+    messageService.sendMessage(message);
   }
 };
 
