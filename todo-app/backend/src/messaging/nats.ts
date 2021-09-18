@@ -1,25 +1,33 @@
 import dotenv from 'dotenv';
-import { connect } from 'nats';
-import { Message, Todo } from '../../../todo-types';
+import { connect, NatsConnection, StringCodec } from 'nats';
+import { Message, Subject, Todo } from '../../../todo-types';
 
 dotenv.config();
 
-const url = process.env.NATS_URL || 'nats://nats:4222';
+const url = process.env.NATS_URL || 'nats://localhost:4222';
 
-const subscribe = async () => {
-  const nc = await connect({ servers: url });
-  const subscription = nc.subscribe('hello');
-  // Do something with subscription
-  subscription.unsubscribe();
+const getConnection = async (): Promise<NatsConnection> => {
+  try {
+    return await connect({ servers: url });
+  } catch (error) {
+    console.error('error connecting to NATS', error);
+    throw error;
+  }
 };
 
-const writeMessage = async ({ message }: Todo): Promise<Message> => {
+const encodeMessage = (msg: Message): Uint8Array => StringCodec().encode(JSON.stringify(msg));
+
+const writeMessage = async (subject: Subject, { message }: Todo): Promise<Message> => {
   const msg: Message = {
     user: 'todo-backend',
     message,
   };
-  // send msg to NATS
+
+  const nc = await getConnection();
+  nc.publish(subject, encodeMessage(msg));
+  nc.drain();
+
   return Promise.resolve(msg);
 };
 
-export default { subscribe, writeMessage };
+export default { writeMessage };
