@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { NewTodo } from '@/types';
+import { NewTodo } from '../../../todo-types';
 
 export default defineComponent({
   name: 'Input',

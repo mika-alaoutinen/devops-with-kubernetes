@@ -14,7 +14,7 @@ import { defineComponent } from 'vue';
 import Input from '@/components/Input.vue';
 import TodoList from '@/components/TodoList.vue';
 import service from '@/services/todoService';
-import { Todo } from '@/types';
+import { Todo } from '../../../todo-types';
 
 export default defineComponent({
   name: 'Todos',

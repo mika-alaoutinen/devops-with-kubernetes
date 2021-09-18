@@ -1,5 +1,5 @@
 import { connect } from 'nats';
-import { Message } from './types';
+import { Message } from '../../todo-types';
 
 const url = process.env.NATS_URL || 'nats://nats:4222';
 

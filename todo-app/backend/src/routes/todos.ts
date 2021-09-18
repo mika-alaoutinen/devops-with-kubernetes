@@ -1,5 +1,5 @@
 import express, { Response } from 'express';
-import { Todo } from '../types';
+import { Todo } from '../../../todo-types';
 import service from '../services/todoService';
 
 const router = express.Router();
