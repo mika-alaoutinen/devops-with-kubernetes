@@ -1,3 +1,8 @@
+export interface Message {
+  user: string
+  message: string
+}
+
 export interface Todo {
   id: number
   done: boolean

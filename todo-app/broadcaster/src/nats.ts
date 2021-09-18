@@ -1,15 +1,23 @@
-import { connect, StringCodec } from 'nats';
+import { connect } from 'nats';
+import { Message } from './types';
 
 const url = process.env.NATS_URL || 'nats://nats:4222';
 
-const connectToNats = async () => {
+const subscribe = async () => {
   const nc = await connect({ servers: url });
-  const sc = StringCodec();
-
   const subscription = nc.subscribe('hello');
-
-  (async () => {
-    console.log(subscription.getProcessed());
-    console.log('subscription closed');
-  })();
+  // Do something with subscription
+  subscription.unsubscribe();
 };
+
+// Read messages from NATS
+const readMessage = async (): Promise<Message> => {
+  console.log('Reading messages from NATS');
+
+  return Promise.resolve({
+    user: 'bot',
+    message: 'hard coded message',
+  });
+};
+
+export default { readMessage, subscribe };

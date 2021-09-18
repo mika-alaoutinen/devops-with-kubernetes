@@ -17,7 +17,7 @@ const saveTodo = async (newTodo: NewTodo): Promise<Todo | string> => {
   }
 
   const persisted = await queries.saveTodo(todo);
-  nats.send(persisted);
+  nats.writeMessage(persisted);
 
   return persisted;
 };
@@ -38,7 +38,7 @@ const updateTodo = async (id: number, updatedTodo: Todo): Promise<Todo | string>
   }
 
   const persisted = await queries.updateTodo(todo);
-  nats.send(persisted);
+  nats.writeMessage(persisted);
 
   return persisted;
 };
