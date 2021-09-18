@@ -6,6 +6,7 @@ const port = 8000;
 app.use(express.json());
 
 app.post('/echo', (req, res) => {
+  console.log(req.body);
   res.send(req.body);
 });
 
