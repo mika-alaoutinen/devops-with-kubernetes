@@ -1,5 +1,5 @@
 import client from './pool';
-import { Todo, UnsavedTodo } from '../../../todo-types';
+import { Todo, UnsavedTodo } from '../types';
 
 const existsById = async (id: number): Promise<boolean> => {
   const sql = 'SELECT id FROM todos WHERE id = ($1)';

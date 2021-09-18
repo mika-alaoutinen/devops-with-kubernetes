@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Todo } from '../../../todo-types';
+import { Todo } from '@/types';
 
 export default defineComponent({
   name: 'TodoList',

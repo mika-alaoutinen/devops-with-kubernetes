@@ -1,6 +1,6 @@
 import queries from '../db/queries';
 import nats from '../messaging/nats';
-import { NewTodo, Todo, UnsavedTodo } from '../../../todo-types';
+import { NewTodo, Todo, UnsavedTodo } from '../types';
 
 const isTodoValid = ({ message }: NewTodo): boolean => message.length <= 140;
 

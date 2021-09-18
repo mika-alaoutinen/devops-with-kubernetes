@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Message } from '../../todo-types';
+import { Message } from './types';
 
 const url = process.env.CHAT_SERVICE_URL || 'http://localhost:8000/echo';
 

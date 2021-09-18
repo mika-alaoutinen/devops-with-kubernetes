@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { backendUrl } from '@/environment';
-import { NewTodo, Todo } from '../../../todo-types';
+import { NewTodo, Todo } from '@/types';
 
 const todosUrl = `${backendUrl}/todos`;
 

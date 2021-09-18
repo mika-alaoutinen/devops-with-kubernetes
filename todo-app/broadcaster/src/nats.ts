@@ -1,7 +1,7 @@
 import { connect, NatsConnection, Subscription } from 'nats';
 import messageService from './messageService';
 import { logMessage, parseMessage } from './messageUtils';
-import { Subject } from '../../todo-types';
+import { Subject } from './types';
 
 const url = process.env.NATS_URL || 'nats://localhost:4222';
 

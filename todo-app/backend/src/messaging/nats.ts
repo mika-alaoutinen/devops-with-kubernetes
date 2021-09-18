@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { connect, NatsConnection, StringCodec } from 'nats';
-import { Message, Subject, Todo } from '../../../todo-types';
+import { Message, Subject, Todo } from '../types';
 
 dotenv.config();
 
