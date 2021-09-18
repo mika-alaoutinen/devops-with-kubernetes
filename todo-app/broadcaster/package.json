@@ -1,11 +1,12 @@
 {
-  "name": "broadcaster",
+  "name": "todo-broadcaster",
   "version": "1.0.0",
   "description": "Sends TODO messages to an external service via HTTP",
   "main": "index.ts",
   "author": "Mika Alaoutinen",
   "license": "ISC",
   "scripts": {
+    "build": "tsc",
     "dev": "nodemon src/index.ts",
     "lint": "eslint --ext ts,tsx . --fix",
     "start": "node dist/index.ts",
