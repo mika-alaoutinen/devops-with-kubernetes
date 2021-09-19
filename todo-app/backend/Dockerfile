@@ -13,7 +13,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json .
 
-RUN npm i --only=production
+RUN npm i --silent --only=production
 COPY --from=build /app/dist ./dist
 
 # RUN addgroup -g 1001 -S appuser

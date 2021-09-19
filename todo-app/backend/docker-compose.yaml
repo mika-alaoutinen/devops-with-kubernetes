@@ -1,29 +1,27 @@
 version: '3.8'
 
-# Add compose file for local development purposes
 services:
   backend:
     image: mikaalaoutinen/todo-backend:latest
     container_name: todo-backend
     depends_on:
       - postgres
+    # Overwrite POSTGRES_HOST in .env file
     environment:
-      PORT: 8080
       POSTGRES_HOST: postgres
-      POSTGRES_DATABASE: todoapp
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+    env_file: .env
     ports:
       - 8080:8080
     restart: unless-stopped
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
 
   postgres:
     image: postgres
-    container_name: postgres_todoapp
-    environment:
-      POSTGRES_DATABASE: todoapp
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+    container_name: postgres-todoapp
+    env_file: .env
     expose:
       - 5432
     ports:
