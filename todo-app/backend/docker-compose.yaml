@@ -24,9 +24,18 @@ services:
   broadcaster:
     container_name: todo-broadcaster
     environment:
-      CHAT_SERVICE_URL: http://localhost:8000/echo
+      CHAT_SERVICE_URL: http://echo:8000/echo
       NATS_URL: nats://nats:4222
     image: mikaalaoutinen/todo-broadcaster
+    restart: unless-stopped
+
+  echo:
+    container_name: echo-service
+    expose:
+      - 8000
+    image: mikaalaoutinen/echo-service
+    ports:
+      - 8000:8000
     restart: unless-stopped
 
   nats:
