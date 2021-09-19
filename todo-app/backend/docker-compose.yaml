@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: mikaalaoutinen/todo-backend:latest
+    command: npm run dev
     container_name: todo-backend
     depends_on:
       - postgres
@@ -10,13 +10,14 @@ services:
     environment:
       POSTGRES_HOST: postgres
     env_file: .env
+    image: mikaalaoutinen/todo-backend:latest
     ports:
       - 8080:8080
     restart: unless-stopped
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
-    working_dir: /usr/src/app
+      - .:/app
+      - /app/node_modules
+    working_dir: /app
 
   postgres:
     image: postgres
