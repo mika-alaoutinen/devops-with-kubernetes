@@ -36,6 +36,14 @@ services:
       - 8000:8000
     restart: unless-stopped
 
+  frontend:
+    container_name: todo-frontend
+    image: mikaalaoutinen/todo-frontend
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    # working_dir: /app
+
   nats:
     container_name: nats-todoapp
     expose:
