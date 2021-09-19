@@ -7,8 +7,6 @@ services:
     depends_on:
       - nats
       - postgres
-    environment:
-      PORT: 8080
     env_file: .env
     image: mikaalaoutinen/todo-backend
     ports:
@@ -36,13 +34,13 @@ services:
       - 8000:8000
     restart: unless-stopped
 
+  # Couldn't get hot reloading to work
   frontend:
     container_name: todo-frontend
     image: mikaalaoutinen/todo-frontend
     ports:
-      - 3000:3000
+      - 3001:3000
     restart: unless-stopped
-    # working_dir: /app
 
   nats:
     container_name: nats-todoapp
