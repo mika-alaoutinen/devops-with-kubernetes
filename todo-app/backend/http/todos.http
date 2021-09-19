@@ -1,4 +1,6 @@
-@todos = http://localhost:8080/api/todos
+@docker-port = 8081
+@local-port = 8080
+@todos = http://localhost:{{local-port}}/api/todos
 
 ### get all todos
 GET {{todos}} HTTP/1.1
