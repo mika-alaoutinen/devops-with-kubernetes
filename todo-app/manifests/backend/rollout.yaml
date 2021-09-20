@@ -29,6 +29,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: todo-backend-configmap
+            - configMapRef:
+                name: todo-broadcaster-configmap
             - secretRef:
                 name: postgres-credentials
           readinessProbe:

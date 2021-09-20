@@ -1,6 +1,14 @@
-@url = http://localhost:8000/echo
+@url = http://localhost:8000
 
-POST {{url}} HTTP/1.1
+### Root
+GET {{url}} HTTP/1.1
+
+### Get all messages
+GET {{url}}/echo HTTP/1.1
+
+### POST a message
+
+POST {{url}}/echo HTTP/1.1
 Content-Type: application/json
 
 {

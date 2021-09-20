@@ -18,5 +18,6 @@ data:
 
     CREATE TABLE IF NOT EXISTS todos (
       id SERIAL PRIMARY KEY,
+      done BOOLEAN NOT NULL,
       message VARCHAR NOT NULL
     );
