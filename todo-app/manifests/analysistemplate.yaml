@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+
+metadata:
+  name: restart-rate
+  namespace: todo
+
+spec:
+  metrics:
+  - name: restart-rate
+    initialDelay: 2m
+    successCondition: result[0] < 0.001
+    provider:
+      prometheus:
+        address: http://prometheus-stack-kube-prom-prometheus.prometheus:9090
+        query: |
+          sum (rate (container_cpu_usage_seconds_total{namespace="todo"}[10m])) / sum (machine_cpu_cores) * 100

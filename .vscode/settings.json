@@ -1,9 +1,13 @@
 {
   "eslint.workingDirectories": [
+    "echo-service",
+
     "main-app/reader",
     "main-app/writer",
-    "pingpong",
+    "main-app/pingpong",
+    
     "todo-app/backend",
+    "todo-app/broadcaster",
     "todo-app/frontend"
   ]
 }

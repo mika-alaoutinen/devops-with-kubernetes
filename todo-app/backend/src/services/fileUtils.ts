@@ -19,10 +19,11 @@ const checkFileExists = async (
 
 const readImage = async (dir: string, imageName: string): Promise<Buffer> => {
   const filePath = path.join(dir, imageName);
+
   try {
     return await readFile(filePath);
   } catch (e) {
-    throw new Error(e);
+    throw new Error('Exception trying to read an image');
   }
 };
 

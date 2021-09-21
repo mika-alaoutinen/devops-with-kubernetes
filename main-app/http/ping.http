@@ -1,0 +1,12 @@
+@url = http://localhost:9080
+
+### Hello
+
+GET {{url}} HTTP/1.1
+
+### ping count
+GET {{url}}/pingpong HTTP/1.1
+
+### readiness check
+@readiness = monitoring/readiness
+GET {{url}}/{{readiness}} HTTP/1.1

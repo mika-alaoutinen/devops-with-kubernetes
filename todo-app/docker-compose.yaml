@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  backend:
+    command: npm run dev
+    container_name: todo-backend
+    depends_on:
+      - nats
+      - postgres
+    env_file: .env
+    image: mikaalaoutinen/todo-backend
+    ports:
+      - 8081:8080
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    working_dir: /app
+
+  broadcaster:
+    container_name: todo-broadcaster
+    depends_on:
+      - nats
+    env_file: .env
+    image: mikaalaoutinen/todo-broadcaster
+    restart: unless-stopped
+
+  echo:
+    container_name: echo-service
+    expose:
+      - 8000
+    image: mikaalaoutinen/echo-service
+    ports:
+      - 8000:8000
+    restart: unless-stopped
+
+  # Couldn't get hot reloading to work
+  frontend:
+    container_name: todo-frontend
+    image: mikaalaoutinen/todo-frontend
+    ports:
+      - 3001:3000
+    restart: unless-stopped
+
+  nats:
+    container_name: nats-todoapp
+    expose:
+      - 4222
+    image: nats
+    ports:
+      - 4222:4222
+    restart: unless-stopped
+
+  postgres:
+    container_name: postgres-todoapp
+    env_file: .env
+    expose:
+      - 5432
+    image: postgres
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    volumes:
+      - ./backend/data:/docker-entrypoint-initdb.d

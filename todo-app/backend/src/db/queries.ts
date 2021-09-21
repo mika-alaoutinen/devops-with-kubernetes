@@ -1,5 +1,17 @@
 import client from './pool';
-import { Todo } from '../types';
+import { Todo, UnsavedTodo } from '../types';
+
+const existsById = async (id: number): Promise<boolean> => {
+  const sql = 'SELECT id FROM todos WHERE id = ($1)';
+
+  try {
+    const { rows } = await client.query(sql, [id]);
+    return rows.length === 1 && rows[0].id === id;
+  } catch (error) {
+    console.error(`could not find todo with id, ${id}`);
+    throw error;
+  }
+};
 
 const getAllTodos = async (): Promise<Todo[]> => {
   const sql = 'SELECT * FROM todos';
@@ -12,16 +24,36 @@ const getAllTodos = async (): Promise<Todo[]> => {
   }
 };
 
-const saveTodo = async ({ message }: Todo): Promise<Todo> => {
-  const sql = 'INSERT INTO todos (message) VALUES ($1) RETURNING *';
+const saveTodo = async ({ message }: UnsavedTodo): Promise<Todo> => {
+  const sql = `INSERT INTO
+    todos (done, message)
+    VALUES (false, ($1))
+    RETURNING *`;
 
   try {
-    const response = await client.query(sql, [message]);
-    return response.rows[0];
+    const { rows } = await client.query(sql, [message]);
+    return rows[0];
   } catch (error) {
     console.error('error saving a todo', error);
     throw error;
   }
 };
 
-export default { getAllTodos, saveTodo };
+const updateTodo = async ({ id, done, message }: Todo): Promise<Todo> => {
+  const sql = `UPDATE todos
+    SET done = ($2), message = ($3)
+    WHERE id = ($1)
+    RETURNING *`;
+
+  try {
+    const { rows } = await client.query(sql, [id, done, message]);
+    return rows[0];
+  } catch (error) {
+    console.error('error updating a todo', error);
+    throw error;
+  }
+};
+
+export default {
+  existsById, getAllTodos, saveTodo, updateTodo,
+};

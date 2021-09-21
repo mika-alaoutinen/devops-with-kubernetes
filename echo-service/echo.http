@@ -1,0 +1,17 @@
+@url = http://localhost:8000
+
+### Root
+GET {{url}} HTTP/1.1
+
+### Get all messages
+GET {{url}}/echo HTTP/1.1
+
+### POST a message
+
+POST {{url}}/echo HTTP/1.1
+Content-Type: application/json
+
+{
+  "user": "bot",
+  "message": "A todo was created"
+}

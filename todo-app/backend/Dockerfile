@@ -9,11 +9,13 @@ RUN npm run build
 
 # Application binary
 FROM node:14-alpine
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json .
 
-RUN npm i --only=production
+RUN npm i --silent --only=production
+# Install ts-node-dev to enable hot reloading with Docker Compose for local development
+RUN npm i --silent ts-node-dev
 COPY --from=build /app/dist ./dist
 
 # RUN addgroup -g 1001 -S appuser

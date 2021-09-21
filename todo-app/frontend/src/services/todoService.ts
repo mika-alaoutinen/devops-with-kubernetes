@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { backendUrl } from '@/environment';
-import { Todo } from '@/types';
+import { NewTodo, Todo } from '@/types';
 
 const todosUrl = `${backendUrl}/todos`;
 
@@ -14,14 +14,29 @@ const fetchAllTodos = async (): Promise<Todo[]> => {
   }
 };
 
-const saveTodo = async (todo: Todo): Promise<Todo> => {
+const saveTodo = async (todo: NewTodo): Promise<Todo | string> => {
   try {
     const response = await axios.post(todosUrl, todo);
     return response.data;
   } catch (error) {
     console.log('error saving todo', error);
-    return Promise.resolve(todo);
+    return 'could not save todo';
   }
 };
 
-export default { fetchAllTodos, saveTodo };
+const updateDone = async (todo: Todo): Promise<Todo | string> => {
+  const updated = {
+    ...todo,
+    done: !todo.done,
+  };
+
+  try {
+    const response = await axios.put(`${todosUrl}/${todo.id}`, updated);
+    return response.data;
+  } catch (error) {
+    console.log('error updating todo', error);
+    return 'could not update todo';
+  }
+};
+
+export default { fetchAllTodos, saveTodo, updateDone };

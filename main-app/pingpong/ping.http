@@ -1,3 +1,0 @@
-@url = http://localhost:9080/pingpong
-
-GET {{url}} HTTP/1.1

@@ -1,17 +1,27 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+
 metadata:
   name: todo-backend-dep
   namespace: todo
+
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: todo-backend
+
+  strategy:
+    canary:
+      analysis:
+        templates:
+        - templateName: restart-rate
+
   template:
     metadata:
       labels:
         app: todo-backend
+
     spec:
       containers:
         - name: todo-backend
@@ -19,5 +29,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: todo-backend-configmap
+            - configMapRef:
+                name: todo-broadcaster-configmap
             - secretRef:
                 name: postgres-credentials
+          readinessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            httpGet:
+              path: /api/monitoring/readiness
+              port: 8080
